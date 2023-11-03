@@ -1,0 +1,40 @@
+/* Reset some default browser styles */
+body, h1, h2, div {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set a background color and text color */
+  body {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* Container styling */
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Header styling */
+  h1, h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Item list styling */
+  div > div {
+    font-size: 24px;
+    margin: 5px 0;
+  }
+  
+  /* Error and loading message styling */
+  div > div.error, div > div.loading {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
