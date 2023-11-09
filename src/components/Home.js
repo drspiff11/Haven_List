@@ -6,13 +6,13 @@ function Home() {
   const [foodItems, setFoodItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showMonthly, setShowMonthly] = useState(false); // State for toggling between daily and monthly lists
+  const [showMonthly, setShowMonthly] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const endpoint = showMonthly ? '/monthlyItems' : '/dailyItems'; // Adjust the endpoint based on the toggle state
-        const res = await axios.get(`http://localhost:3000${endpoint}`); // Use the appropriate endpoint
+        const endpoint = showMonthly ? '/monthlyItems' : '/dailyItems';
+        const res = await axios.get(`http://localhost:3000${endpoint}`);
         setFoodItems(res.data);
         setLoading(false);
       } catch (err) {
@@ -31,6 +31,10 @@ function Home() {
     return <div>{error}</div>;
   }
 
+  const categories = showMonthly
+    ? ['Rice', 'Canned Meat', 'Pasta', 'Beans']
+    : ['Produce', 'Bakery', 'Daily Extras', 'For Vermonters'];
+
   return (
     <div>
       <h1>Welcome to the Upper Valley Haven!</h1>
@@ -48,13 +52,18 @@ function Home() {
         </label>
       </div>
       <h2>{showMonthly ? 'Monthly List:' : 'Daily List:'}</h2>
-      <div className="food-list">
-      {foodItems.map((item) => (
-        <div key={item.id} className="food-item">
-          {item.name}
+      {categories.map((category) => (
+        <div className="column" key={category}>
+          <h3>{category}</h3>
+          {foodItems
+            .filter((item) => item.category === category)
+            .map((item) => (
+              <div key={item.id} className="food-item">
+                {item.name}
+              </div>
+            ))}
         </div>
       ))}
-     </div>
     </div>
   );
 }

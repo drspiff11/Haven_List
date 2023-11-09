@@ -37,4 +37,53 @@ body, h1, h2, div {
     font-size: 28px;
     font-weight: bold;
   }
+
   
+  /* Styles for the monthly list */
+.monthly-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+  gap: 20px; /* Adjust the gap between items as needed */
+}
+
+.category {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.category h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Styles for the daily list */
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Create four columns */
+  gap: 10px; /* Adjust the gap between items as needed */
+}
+
+.food-item {
+  font-size: 24px;
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Toggle switch styles */
+.toggle-switch label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  margin-right: 10px;
+}
