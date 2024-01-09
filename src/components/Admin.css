@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/family=Work+Sans:wght@600&display=swap');
+
+.sticky-button {
+    background-color: #f88635;
+    font-family: 'Work Sans', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sticky-button:hover {
+    background-color: #d66819;
+}
+
+/* Style for the 'checked' state of the button */
+.sticky-button.checked {
+    background-color: #d66819; /* Darker shade for checked state */
+}

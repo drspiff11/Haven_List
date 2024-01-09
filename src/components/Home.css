@@ -1,89 +1,191 @@
-/* Reset some default browser styles */
-body, h1, h2, div {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Set a background color and text color */
-  body {
-    background-color: #fff;
-    color: #000;
-  }
-  
-  /* Container styling */
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  /* Header styling */
-  h1, h2 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Item list styling */
-  div > div {
-    font-size: 24px;
-    margin: 5px 0;
-  }
-  
-  /* Error and loading message styling */
-  div > div.error, div > div.loading {
-    font-size: 28px;
-    font-weight: bold;
-  }
+.content{
+  background-color: #f1ece1;
+  padding: 2%;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20;
+  width: 100%;
+}
 
-  
-  /* Styles for the monthly list */
-.monthly-list {
+/* Item List Styling */
+div > div {
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+  transition: background-color 0.3s ease; /* Transition for background color change */
+}
+
+div > .item-list div{
+  cursor: pointer;
+  margin: 5px;
+  margin-top:0;
+}
+
+/* Toggle Button Styling */
+.button.toggle-button {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 20px; /* Larger font size for better visibility */
+  padding: 15px 30px; /* Increased padding for a larger button */
+  padding-bottom: 15px;
+  margin: 20px auto; /* Top and bottom margin for spacing, auto for horizontal centering */
+  margin-bottom: 0;
+  display: block; /* Block display to enable margin auto for centering */
+  background-color: #0054a6; /* Example background color, adjust as needed */
+  color: #fff; /* Text color */
+  border: none;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the toggle button */
+.button.toggle-button:hover {
+  background-color: #003d7a; /* Darker shade on hover */
+}
+
+.food-items-container {
+  margin: auto; /* Centering the container */
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
-  gap: 20px; /* Adjust the gap between items as needed */
+  justify-content: center;
+  grid-template-columns: repeat(4, minmax(150px, 1fr)); /* Responsive grid columns */
+  padding: 20px;
+  gap: 20px; /* Space between grid items */
+  align-items: start; /* Align items to the top of the grid */
 }
 
-.category {
-  border: 1px solid #ddd;
-  padding: 10px;
-  background-color: #f8f8f8;
-  border-radius: 5px;
-  margin-bottom: 20px;
+/* Individual Food Item Styling */
+.food-item {
+  background-color: #f88635; /* Background color for food items */
+  padding: 20px;
+  
+  padding-top: 0;
+  text-align: center;
+  border: 2.5px solid #f88635; /* Border for visual separation */
+
 }
 
-.category h3 {
-  margin: 0;
-  font-size: 18px;
+/* Hover Effect for List Items */
+.food-item:hover {
+  background-color: #d66819; /* Light gray background on hover */
+  border-color: #d66819;
+}
+
+.food-item div{
+  font-family: 'Work Sans', sans-serif, bold
+}
+
+.food-items-container:first-child {
+  border-radius: none;
+}
+
+.category h3{
+  background-color: #ffffff;;
+  width: 225px;
+  margin:0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 768px) {
+  h1, h2 {
+    font-size: 30px; /* Slightly smaller font size */
+  }
+  .food-items-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust grid columns */
+  }
+
+/* Adjust the toggle button for smaller screens if necessary */
+  .button.toggle-button {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+}
+
+/* Error and Loading Message Styling */
+div > div.error, div > div.loading {
+  font-size: 28px;
   font-weight: bold;
 }
 
-/* Styles for the daily list */
-.food-list {
+
+/* Custom Header Styling */
+.header {
+  margin: 0px;
+}
+
+.nav-link {
+  font-family: 'Work Sans', sans-serif;
+  color: #fff; /* White text color for contrast */
+  background-color: #ff6900; /* Orange shade similar to the logo */
+  text-decoration: none; /* Removes the underline */
+  padding: 15px 30px; /* Padding to increase the size of the clickable area */
+  margin: 5px 15px; /* Margin around each navigation item */
+  display: inline-block; /* Allows applying padding and margin correctly */
+  border: none; /* No border for a button-like appearance */
+  border-radius: 4px; /* Rounded corners for a button-like look */
+  cursor: pointer; /* Cursor changes to a pointer to indicate a clickable element */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  list-style-type: none; /* Remove bullet points, in case it's inside a list */
+  margin-bottom: 20px; /* Spacing below the navigation */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for depth */
+  float: right;
+}
+
+.toggle-button {
+  font-family: 'Lora', serif;
+  font-size: 20px; /* Larger font size for better visibility */
+  padding: 15px 30px; /* Increased padding for a larger button */
+  padding-bottom: 15px;
+  margin: 20px auto; /* Top and bottom margin for spacing, auto for horizontal centering */
+  margin-bottom: 0;
+  display: block; /* Block display to enable margin auto for centering */
+  background-color: #0054a6; /* Example background color, adjust as needed */
+  color: #fff; /* Text color */
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.food-items-container {
+  max-width: 1000px; /* Maximum width for the container */
+  margin: auto; /* Centering the container */
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Create four columns */
-  gap: 10px; /* Adjust the gap between items as needed */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid columns */
+  padding: 20px;
+  gap: 20px; /* Space between grid items */
+  align-items: start; /* Align items to the top of the grid */
 }
 
 .food-item {
-  font-size: 24px;
-  background-color: #fff;
-  padding: 10px;
+  background-color: #f88635; /* Background color for food items */
+  color:#fff;
+  padding: 20px;
+  font-weight: bold;
   text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 2.5px solid #f88635; /* Border for visual separation */
+  border-radius: 4px;
 }
 
-/* Toggle switch styles */
-.toggle-switch label {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  margin-bottom: 20px;
+.toggle-button {
+    padding: 10px 20px;
+    font-size: 18px;
 }
 
-.toggle-switch input[type="checkbox"] {
-  margin-right: 10px;
+.loading {
+  font-size: 28px;
+  font-weight: bold;
 }
+
+.header {
+  margin: 0px;
+}
+
+h1, h2 {
+  font-family: 'Lora', serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+

@@ -1,154 +1,71 @@
-/* Reset some default browser styles */
-body, h1, h2, div {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Set a background color and text color */
-  body {
-    background-color: #fff;
-    color: #000;
-  }
-  
-  /* Container styling */
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  /* Header styling */
-  h1 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/family=Work+Sans:wght@600&display=swap');
 
-  h2 {
-    padding-top: 5em;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Item list styling */
-  div > div {
-    font-size: 24px;
-    margin: 5px 0;
-  }
-  
-  /* Error and loading message styling */
-  div > div.error, div > div.loading {
-    font-size: 28px;
-    font-weight: bold;
-  }
 
-  /* Reset some default browser styles */
-body, h1, h2, div, ul, li {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Make sure to use box-sizing: border-box for better control */
-  * {
-    box-sizing: border-box;
-  }
-  
-  /* Set a background color and text color */
-  body {
-    background-color: #fff;
-    color: #000;
-  }
-  
-  /* Container styling */
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  /* Header styling */
-  h1, h2 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Navigation styling */
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style-type: none;
-    margin-bottom: 20px;
-  }
-  
-  nav ul li {
-    margin: 5px 15px;
-  }
-  
-  /* Item list styling */
-  div > div {
-    font-size: 24px;
-    margin: 5px 0;
-    text-align: center;
-    width: 100%;
-  }
-  
-  /* For smaller screens, adjust font size */
-  @media (max-width: 768px) {
-    h1, h2 {
-      font-size: 30px;
-    }
-    div > div {
-      font-size: 20px;
-    }
-  }
-  
-  /* Error and loading message styling */
-  div > div.error, div > div.loading {
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-/* Existing CSS ... */
-
-/* Item list styling */
-div > div {
-    font-size: 24px;
-    margin: 5px 0;
-    text-align: center;
-    width: 100%;
-    background-color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;  /* Smooth transition */
-  }
-  
-  /* Hover effect for list items */
-  div > div:hover {
-    background-color: #f2f2f2;  /* Light gray background on hover */
-  }
-  
-  /* Existing CSS for smaller screens, errors, and loading... */
-
-  /* Create a grid layout for the daily list */
-.food-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Create four columns */
-  gap: 10px; /* Adjust the gap between items as needed */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Item styling for each grid item */
-.food-item {
-  font-size: 24px;
-  background-color: #fff;
-  padding: 10px;
-  text-align: center;
+/* Body Styling */
+body {
+  color: #000; /* Black text color */
+  background-color: #ebe7e7;
+  position: relative;
 }
-  
+
+/* Container Styling */
+div {
+  font-family: 'Lora', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ 
+  margin: auto; /* Centering the container */
+}
+
+/* Header Styling */
+header {
+  width: 100%;       /* Span the full width of the page */
+  margin-top: 0;     /* Start from the very top of the page */
+  background-color: #0054a6; /* Example background color */
+  margin: 0;         /* Reset margin to ensure no space around */
+  padding: 0;  
+}
+
+footer{
+  background-color:#0054a6;
+}
+
+/* Additional Styling for h2 */
+h2 {
+  padding-top: 1em; /* Spacing at the top */
+}
+
+/* Navigation Styling */
+.nav-link {
+  font-family: 'Work Sans', sans-serif;
+  color: #fff; /* White text color for contrast */
+  background-color: #ff6900; /* Orange shade similar to the logo */
+  text-decoration: none; /* Removes the underline */
+  padding: 15px 30px; /* Padding to increase the size of the clickable area */
+  margin: 5px 15px; /* Margin around each navigation item */
+  display: inline-block; /* Allows applying padding and margin correctly */
+  border: none; /* No border for a button-like appearance */
+  border-radius: 4px; /* Rounded corners for a button-like look */
+  cursor: pointer; /* Cursor changes to a pointer to indicate a clickable element */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  list-style-type: none; /* Remove bullet points, in case it's inside a list */
+  margin-bottom: 20px; /* Spacing below the navigation */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for depth */
+  float: right;
+}
+
+.nav-link:hover, .nav-link:focus {
+  background-color: #e05d00; /* Slightly darker orange shade for hover state */
+  text-decoration: none; /* Ensures text decoration does not reappear on hover */
+}
+
+

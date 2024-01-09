@@ -1,0 +1,186 @@
+{
+  "dailyItems": [
+    {
+      "id": 1,
+      "name": "Squash, Butternut",
+      "category": "Produce",
+      "isVisible": false
+    },
+    {
+      "id": 2,
+      "name": "Apples",
+      "category": "Produce",
+      "isVisible": false
+    },
+    {
+      "id": 3,
+      "name": "Kale",
+      "category": "Produce",
+      "isVisible": false
+    },
+    {
+      "id": 4,
+      "name": "Onions",
+      "category": "Produce",
+      "isVisible": false
+    },
+    {
+      "id": 5,
+      "name": "Potatoes",
+      "category": "Produce",
+      "isVisible": false
+    },
+    {
+      "id": 6,
+      "name": "Italian Bread",
+      "category": "Bread",
+      "isVisible": false
+    },
+    {
+      "id": 7,
+      "name": "Pepperjack Popcorn",
+      "category": "Extras",
+      "isVisible": false
+    },
+    {
+      "id": 8,
+      "name": "Dried Cherries",
+      "category": "USDA",
+      "isVisible": false
+    }
+  ],
+  "monthlyItems": [
+    {
+      "id": 1,
+      "name": "Canned Tuna",
+      "category": "Canned Meat",
+      "isVisible": true
+    },
+    {
+      "id": 2,
+      "name": "Canned Chicken",
+      "category": "Canned Meat",
+      "isVisible": true
+    },
+    {
+      "id": 3,
+      "name": "White Rice",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 4,
+      "name": "Brown Rice",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 5,
+      "name": "Mac and Cheese",
+      "category": "Dry",
+      "isVisible": false
+    },
+    {
+      "id": 6,
+      "name": "Spaghetti",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 7,
+      "name": "Penne",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 8,
+      "name": "Elbows",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 9,
+      "name": "Egg Noodle",
+      "category": "Dry",
+      "isVisible": true
+    },
+    {
+      "id": 10,
+      "name": "Black Beans",
+      "category": "Beans",
+      "isVisible": false
+    },
+    {
+      "id": 11,
+      "name": "Red Kidney Beans",
+      "category": "Beans",
+      "isVisible": false
+    },
+    {
+      "id": 12,
+      "name": "Pinto Beans",
+      "category": "Beans",
+      "isVisible": false
+    },
+    {
+      "id": 13,
+      "name": "Garbanzo Beans",
+      "category": "Beans",
+      "isVisible": false
+    },
+    {
+      "id": 14,
+      "name": "Corn",
+      "category": "Vegetables",
+      "isVisible": false
+    },
+    {
+      "id": 15,
+      "name": "Peas",
+      "category": "Vegetables",
+      "isVisible": false
+    },
+    {
+      "id": 16,
+      "name": "Green Beans",
+      "category": "Vegetables",
+      "isVisible": false
+    },
+    {
+      "id": 17,
+      "name": "Carrots",
+      "category": "Vegetables",
+      "isVisible": false
+    },
+    {
+      "id": 18,
+      "name": "Mixed Vegetables",
+      "category": "Vegetables",
+      "isVisible": false
+    },
+    {
+      "id": 19,
+      "name": "Mandarin Oranges",
+      "category": "Fruit",
+      "isVisible": false
+    },
+    {
+      "id": 20,
+      "name": "Sliced Peaches",
+      "category": "Fruit",
+      "isVisible": false
+    },
+    {
+      "id": 21,
+      "name": "Fruit Cocktail",
+      "category": "Fruit",
+      "isVisible": false
+    },
+    {
+      "id": 22,
+      "name": "Applesauce",
+      "category": "Fruit",
+      "isVisible": false
+    }
+  ]
+}

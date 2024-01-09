@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/family=Work+Sans:wght@600&display=swap');
+
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates a 3-column layout */
+  gap: 20px; /* Adjust the gap between columns as needed */
+  padding: 20px;
+  align-items: start; /* This ensures that all items align at the top */
+}
+
+.list-container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns children (h3 and items) to the top */
+  margin-top: 20px;
+}
+
+.list-container h3 {
+  margin-top: 0; /* Adjust to the height of your tallest category title */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-item-order {
+  background-color: #f88635;
+  font-family: 'Work Sans', sans-serif;
+  color: #fff;
+  padding: 2%;
+  font-weight: bold;
+  text-align: center;
+  border:none;
+  border-radius: 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+.food-item-order div {
+  padding: 5%;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.food-item-order:hover {
+  background-color: #d66819;
+}
+
+.food-item-order.selected {
+  background-color: #d66819; /* Background color for selected state, similar to hover state */
+}
+
+
+input{
+  color: #0b0b0b; 
+  font-family: 'Work Sans', sans-serif;
+  padding: 1%;
+  border:none;
+}
+
+input[type='text']{
+  
+}
+
+input[type="text"]::placeholder {
+  color: #0b0b0b; 
+}
+
+input[type='number'] {
+  padding: .5%;
+  width: 4em;
+}
+
+input[type='number']::placeholder {
+
+}
+
+/* Form Elements Styling */
+
+/* Style all input types */
+input[type="text"], input[type="email"], input[type="number"], select, textarea {
+  font-family: 'Work Sans', sans-serif; /* Consistent font */
+  padding: 10px; /* Padding for better readability */
+  margin: 5px 0 20px 0; /* Spacing between elements */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Box sizing */
+  width: 60%; /* Full width */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Style the focus state of inputs for better accessibility */
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+  border-color: #ff6900; /* Highlight color for focus */
+  outline: none; /* Remove default focus outline */
+}
+
+/* Style for form buttons */
+ button, input[type="submit"] {
+  background-color: #4CAF50; /* Consistent button color */
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+/* Hover effect for buttons */
+button:hover, input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.anonymous-checkbox {
+  font-family: 'Work Sans', sans-serif;
+  font-weight:550;
+  font-size: medium;
+  display: block;
+  margin-top: 10px; /* Adjust as needed */
+  margin-bottom: 10px; /* Adjust as needed */
+  
+}
+
+input[type="checkbox"]{
+  margin-right: 5px; /* Adjust as needed */
+}
+
+/* Responsive design */
+@media screen and (max-width: 600px) {
+  input[type="text"], input[type="email"], input[type="number"], select, textarea, button, input[type="submit"] {
+    width: 100%; /* Full width on small screens */
+    margin-top: 0;
+  }
+}

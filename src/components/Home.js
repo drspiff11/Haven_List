@@ -1,12 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MenuOutlined } from '@ant-design/icons';
+import './Home.css'; // Ensure you have this CSS file in your project
 
 function Home() {
   const [foodItems, setFoodItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showMonthly, setShowMonthly] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,47 +30,58 @@ function Home() {
     fetchData();
   }, [showMonthly]);
 
+  // Organize food items by category
+  const categorizedItems = foodItems.reduce((acc, item) => {
+    acc[item.category] = acc[item.category] || [];
+    acc[item.category].push(item);
+    return acc;
+  }, {});
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div class="header" className="loading">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="error-message">{error}</div>;
   }
 
-  const categories = showMonthly
-    ? ['Rice', 'Canned Meat', 'Pasta', 'Beans']
-    : ['Produce', 'Bakery', 'Daily Extras', 'For Vermonters'];
+  const toggleListType = () => {
+    setShowMonthly(!showMonthly);
+  };
 
   return (
-    <div>
-      <h1>Welcome to the Upper Valley Haven!</h1>
-      <li><Link to="/order">Place Order</Link></li>
-      <li><Link to="/login">Login</Link></li>
-      <li><Link to="/register">Register</Link></li>
-      <div className="toggle-switch">
-        <label>
-          <input
-            type="checkbox"
-            checked={showMonthly}
-            onChange={() => setShowMonthly(!showMonthly)}
-          />
-          Show Monthly List
-        </label>
-      </div>
-      <h2>{showMonthly ? 'Monthly List:' : 'Daily List:'}</h2>
-      {categories.map((category) => (
-        <div className="column" key={category}>
-          <h3>{category}</h3>
-          {foodItems
-            .filter((item) => item.category === category)
-            .map((item) => (
-              <div key={item.id} className="food-item">
-                {item.name}
-              </div>
-            ))}
+    
+    <div className="container">
+      <header className="header">
+      <nav className="nav">
+        <Link to="/admin" className="nav-link">Admin</Link>
+        <Link to="/order" className="nav-link">Place Order</Link>
+      </nav>
+      </header>
+
+      <div className="item-list">
+      <h1>Today's Food Shelf List</h1>
+      <button className="button toggle-button" onClick={toggleListType}>
+        {showMonthly ? 'Show Daily List' : 'Show Monthly List'}
+      </button>
+
+      <section className="content">
+        <h2>{showMonthly ? 'Monthly List:' : 'Daily List:'}</h2>
+        <div className="food-items-container">
+          {Object.keys(categorizedItems).map((category) => (
+            <div className='category' key={category}>
+              <h3>{category}</h3>
+              {categorizedItems[category].map((item) => (
+                <div key={item.id} className="food-item">
+                  <div>{item.name}</div>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
-      ))}
+      </section>
+      </div>
+      <footer></footer>
     </div>
   );
 }
