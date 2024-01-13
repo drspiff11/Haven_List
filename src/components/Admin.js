@@ -8,6 +8,8 @@ const Admin = () => {
   const [monthlyItems, setMonthlyItems] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +29,10 @@ const Admin = () => {
   
     fetchItems();
   }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleSubmit = async () => {
     try {
@@ -54,6 +60,17 @@ const Admin = () => {
     }
   };
 
+  const handleAdd = () => {
+    console.log('Add functionality to be implemented');
+  };
+
+  const handleRemove = () => {
+    console.log('Remove functionality to be implemented');
+  };
+
+  const filteredDailyItems = searchTerm ? dailyItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())) : dailyItems;
+  const filteredMonthlyItems = searchTerm ? monthlyItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())) : monthlyItems;
+
   if (isLoading) {
     return <div className="admin-container">Loading items...</div>;
   }
@@ -63,47 +80,49 @@ const Admin = () => {
   }
 
   return (
-    
     <div>
       <header className="header">
-      <nav className="nav">
-        <Link to="/order" className="nav-link">Order</Link>
-        <Link to="/" className="nav-link">Home</Link>
-      </nav>
+        <nav className="nav">
+          <Link to="/order" className="nav-link">Order</Link>
+          <Link to="/" className="nav-link">Home</Link>
+        </nav>
       </header>
 
       <h1>Admin Panel</h1>
 
-     {/* Daily Items */}
-    <div className='daily-items'>
-      <h3>Daily</h3>  
-      {dailyItems.map((item) => (
-        <button
-          key={item.id}
-          className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
-          onClick={() => handleCheckboxChange(item, 'daily')}
-        >
-          {item.name}
-        </button>
-      ))}
-    </div>
+      <input type="text" placeholder="Search items..." onChange={handleSearchChange} />
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleRemove}>Remove</button>
 
-    {/* Monthly Items */}
-    <div className='monthly-items'>
-      <h3>Monthly</h3>  
-      {monthlyItems.map((item) => (
-        <button
-          key={item.id}
-          className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
-          onClick={() => handleCheckboxChange(item, 'monthly')}
-        >
-          {item.name}
-        </button>
-      ))}
-    </div>
+      {/* Daily Items */}
+      <div className='daily-items'>
+        <h3>Daily</h3>  
+        {filteredDailyItems.map((item) => (
+          <button
+            key={item.id}
+            className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
+            onClick={() => handleCheckboxChange(item, 'daily')}
+          >
+            {item.name}
+          </button>
+        ))}
+      </div>
+
+      {/* Monthly Items */}
+      <div className='monthly-items'>
+        <h3>Monthly</h3>  
+        {filteredMonthlyItems.map((item) => (
+          <button
+            key={item.id}
+            className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
+            onClick={() => handleCheckboxChange(item, 'monthly')}
+          >
+            {item.name}
+          </button>
+        ))}
+      </div>
 
       <button onClick={handleSubmit}>Update</button>
-
     </div>
   );
 };

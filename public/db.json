@@ -4,25 +4,25 @@
       "id": 0,
       "name": "Yellow Onions",
       "category": "Produce",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 1,
       "name": "Potatoes",
       "category": "Produce",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 2,
       "name": "Baguette",
       "category": "Bakery",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 3,
       "name": "Yellow Onions",
       "category": "Extras",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 4,
@@ -138,7 +138,7 @@
       "id": 19,
       "name": "Mandarin Oranges",
       "category": "Fruit",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 20,
