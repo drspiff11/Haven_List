@@ -20,7 +20,9 @@ function Home() {
       try {
         const endpoint = showMonthly ? '/monthlyItems' : '/dailyItems';
         const res = await axios.get(`http://localhost:3000${endpoint}`);
-        setFoodItems(res.data);
+        // Filter items to only include those with isVisible = true
+        const visibleItems = res.data.filter(item => item.isVisible);
+        setFoodItems(visibleItems);
         setLoading(false);
       } catch (err) {
         setError('An error occurred while fetching data.');

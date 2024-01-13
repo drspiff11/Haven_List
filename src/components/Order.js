@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Order.css';
 
 function Order() {
@@ -16,6 +17,10 @@ function Order() {
   const [selectedState, setSelectedState] = useState('');
   const [notes, setNotes] = useState('');
   const [showMonthly, setShowMonthly] = useState(false); // New state to toggle between daily and monthly lists
+  const [selectedDailyItems, setSelectedDailyItems] = useState(new Set());
+  const [selectedMonthlyItems, setSelectedMonthlyItems] = useState(new Set());
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,8 +48,12 @@ function Order() {
     return acc;
   }, {});
 
-  const handleItemClick = itemId => {
-    setSelectedItems(prevSelectedItems => {
+  const handleItemClick = (itemId, isMonthly) => {
+    // Determine which set to update based on whether the item is monthly
+    const updateSet = isMonthly ? selectedMonthlyItems : selectedDailyItems;
+    const setUpdateFunction = isMonthly ? setSelectedMonthlyItems : setSelectedDailyItems;
+  
+    setUpdateFunction(prevSelectedItems => {
       const newSelectedItems = new Set(prevSelectedItems);
       if (newSelectedItems.has(itemId)) {
         newSelectedItems.delete(itemId);
@@ -55,6 +64,7 @@ function Order() {
     });
   };
 
+
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -64,13 +74,38 @@ function Order() {
   }
 
   const placeOrder = async () => {
-    // Send the selected items to the server to place the order
+    console.log("Place Order function called");
     try {
-      await axios.post('/orders', { items: Array.from(selectedItems) }); // Replace with your endpoint
+      // Fetch both daily and monthly items again to ensure we have the complete lists
+      const dailyResponse = await axios.get('http://localhost:3000/dailyItems');
+      const monthlyResponse = await axios.get('http://localhost:3000/monthlyItems');
+  
+      // Filter the fetched items based on the selected IDs
+      const filteredDailyItems = dailyResponse.data.filter(item => selectedDailyItems.has(item.id));
+      const filteredMonthlyItems = monthlyResponse.data.filter(item => selectedMonthlyItems.has(item.id));
+  
+      const orderData = {
+        firstName,
+        lastName,
+        isAnonymous,
+        householdSize,
+        selectedState,
+        notes,
+        selectedDailyItems: Array.from(selectedDailyItems),
+        selectedMonthlyItems: Array.from(selectedMonthlyItems),
+        dailyItems: filteredDailyItems,
+        monthlyItems: filteredMonthlyItems
+      };
+  
+      await axios.post('http://localhost:3000/orders', orderData);
+      console.log("Order Data:", orderData);
+      navigate('/report', { state: { orderData } });
+      console.log("Navigate called");
     } catch (error) {
       console.error('Error placing order:', error);
     }
-  };
+  };  
+  
 
   return (
     <div>
@@ -137,8 +172,8 @@ function Order() {
             {categorizedItems[category].map((item) => (
               <div 
                 key={item.id} 
-                className={`food-item-order ${selectedItems.has(item.id) ? 'selected' : ''}`}
-                onClick={() => handleItemClick(item.id)}
+                className={`food-item-order ${selectedDailyItems.has(item.id) && !showMonthly || selectedMonthlyItems.has(item.id) && showMonthly ? 'selected' : ''}`}
+                onClick={() => handleItemClick(item.id, showMonthly)}
               >
                 <div>{item.name}</div>
               </div>

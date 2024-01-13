@@ -96,8 +96,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus,
 
 /* Style for form buttons */
  button, input[type="submit"] {
-  background-color: #4CAF50; /* Consistent button color */
+  background-color: #0054a6; /* Consistent button color */
   color: white;
+  font-size: larger;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -109,7 +110,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus,
 
 /* Hover effect for buttons */
 button:hover, input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #003d7a;
 }
 
 .anonymous-checkbox {

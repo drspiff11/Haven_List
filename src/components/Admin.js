@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './Admin.css'; // Assuming Admin.css is in the same directory
+import { Link, useNavigate } from 'react-router-dom';
+import './Admin.css';
 
 const Admin = () => {
   const [dailyItems, setDailyItems] = useState([]);
   const [monthlyItems, setMonthlyItems] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Fetch items from the server when the component mounts
   useEffect(() => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     const fetchItems = async () => {
       try {
         const dailyResponse = await axios.get('http://localhost:3000/dailyItems');
@@ -19,19 +19,33 @@ const Admin = () => {
         setDailyItems(dailyResponse.data);
         setMonthlyItems(monthlyResponse.data);
       } catch (error) {
-        setError('Failed to fetch items');
+        setError('Failed to fetch items: ' + error.message);
       } finally {
-        setIsLoading(false); // Stop loading regardless of outcome
+        setIsLoading(false);
       }
     };
-
+  
     fetchItems();
-
   }, []);
 
-  // Handle checkbox change for daily items
+  const handleSubmit = async () => {
+    try {
+      for (const item of dailyItems) {
+        await axios.put(`http://localhost:3000/dailyItems/${item.id}`, { ...item, isVisible: item.isVisible });
+      }
+  
+      for (const item of monthlyItems) {
+        await axios.put(`http://localhost:3000/monthlyItems/${item.id}`, { ...item, isVisible: item.isVisible });
+      }
+  
+      navigate('/');
+    } catch (error) {
+      console.error('Error updating lists:', error);
+    }
+  };
+
   const handleCheckboxChange = (item, type) => {
-    const updatedItem = { ...item, checked: !item.checked };
+    const updatedItem = { ...item, isVisible: !item.isVisible };
     
     if (type === 'daily') {
       setDailyItems(dailyItems.map(i => i.id === item.id ? updatedItem : i));
@@ -42,6 +56,10 @@ const Admin = () => {
 
   if (isLoading) {
     return <div className="admin-container">Loading items...</div>;
+  }
+
+  if (error) {
+    return <div className="admin-container">Error: {error}</div>;
   }
 
   return (
@@ -56,33 +74,36 @@ const Admin = () => {
 
       <h1>Admin Panel</h1>
 
-      {/* Daily Items */}
-      <div className='daily-items'>
+     {/* Daily Items */}
+    <div className='daily-items'>
       <h3>Daily</h3>  
       {dailyItems.map((item) => (
         <button
           key={item.id}
-          className={`sticky-button ${item.checked ? 'checked' : ''}`}
+          className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
           onClick={() => handleCheckboxChange(item, 'daily')}
         >
           {item.name}
         </button>
       ))}
-      </div>
+    </div>
 
-      {/* Monthly Items */}
-      <div className='monthly-items'>
+    {/* Monthly Items */}
+    <div className='monthly-items'>
       <h3>Monthly</h3>  
       {monthlyItems.map((item) => (
         <button
           key={item.id}
-          className={`sticky-button ${item.checked ? 'checked' : ''}`}
+          className={`sticky-button ${item.isVisible ? 'checked' : ''}`}
           onClick={() => handleCheckboxChange(item, 'monthly')}
         >
           {item.name}
         </button>
       ))}
-      </div>
+    </div>
+
+      <button onClick={handleSubmit}>Update</button>
+
     </div>
   );
 };

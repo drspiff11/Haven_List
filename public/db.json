@@ -1,78 +1,54 @@
 {
   "dailyItems": [
     {
-      "id": 1,
-      "name": "Squash, Butternut",
+      "id": 0,
+      "name": "Yellow Onions",
       "category": "Produce",
-      "isVisible": false
+      "isVisible": true
+    },
+    {
+      "id": 1,
+      "name": "Potatoes",
+      "category": "Produce",
+      "isVisible": true
     },
     {
       "id": 2,
-      "name": "Apples",
-      "category": "Produce",
-      "isVisible": false
+      "name": "Baguette",
+      "category": "Bakery",
+      "isVisible": true
     },
     {
       "id": 3,
-      "name": "Kale",
-      "category": "Produce",
-      "isVisible": false
+      "name": "Yellow Onions",
+      "category": "Extras",
+      "isVisible": true
     },
     {
       "id": 4,
-      "name": "Onions",
-      "category": "Produce",
-      "isVisible": false
-    },
-    {
-      "id": 5,
-      "name": "Potatoes",
-      "category": "Produce",
-      "isVisible": false
-    },
-    {
-      "id": 6,
-      "name": "Italian Bread",
-      "category": "Bread",
-      "isVisible": false
-    },
-    {
-      "id": 7,
-      "name": "Pepperjack Popcorn",
-      "category": "Extras",
-      "isVisible": false
-    },
-    {
-      "id": 8,
-      "name": "Dried Cherries",
+      "name": "Whole Almonds",
       "category": "USDA",
       "isVisible": false
     }
   ],
   "monthlyItems": [
     {
-      "id": 1,
-      "name": "Canned Tuna",
-      "category": "Canned Meat",
-      "isVisible": true
-    },
-    {
       "id": 2,
       "name": "Canned Chicken",
       "category": "Canned Meat",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 3,
       "name": "White Rice",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 4,
       "name": "Brown Rice",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 5,
@@ -84,25 +60,25 @@
       "id": 6,
       "name": "Spaghetti",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 7,
       "name": "Penne",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 8,
       "name": "Elbows",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 9,
       "name": "Egg Noodle",
       "category": "Dry",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "id": 10,
@@ -162,7 +138,7 @@
       "id": 19,
       "name": "Mandarin Oranges",
       "category": "Fruit",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 20,
@@ -182,5 +158,6 @@
       "category": "Fruit",
       "isVisible": false
     }
-  ]
+  ],
+  "orders": []
 }
