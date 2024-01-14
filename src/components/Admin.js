@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { usePopperTooltip } from 'react-popper-tooltip';
+import 'react-popper-tooltip/dist/styles.css';
 import './Admin.css';
 
 const Admin = () => {
@@ -9,8 +11,24 @@ const Admin = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  
   const navigate = useNavigate();
+  
+  const {
+    getArrowProps: getArrowPropsAdd,
+    getTooltipProps: getTooltipPropsAdd,
+    setTooltipRef: setTooltipRefAdd,
+    setTriggerRef: setTriggerRefAdd,
+    visible: visibleAdd,
+  } = usePopperTooltip({ trigger: 'hover', placement: 'top', interactive: true, delayHide: 200 });
+  
+  const {
+    getArrowProps: getArrowPropsRemove,
+    getTooltipProps: getTooltipPropsRemove,
+    setTooltipRef: setTooltipRefRemove,
+    setTriggerRef: setTriggerRefRemove,
+    visible: visibleRemove,
+  } = usePopperTooltip({ trigger: 'hover', placement: 'bottom', interactive: true, delayHide: 200 });
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -69,7 +87,9 @@ const Admin = () => {
   };
 
   const filteredDailyItems = searchTerm ? dailyItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())) : dailyItems;
+
   const filteredMonthlyItems = searchTerm ? monthlyItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())) : monthlyItems;
+
 
   if (isLoading) {
     return <div className="admin-container">Loading items...</div>;
@@ -88,11 +108,57 @@ const Admin = () => {
         </nav>
       </header>
 
-      <h1>Admin Panel</h1>
+      <h1 id="admin-header">Admin Panel</h1>
 
       <input type="text" placeholder="Search items..." onChange={handleSearchChange} />
-      <button onClick={handleAdd}>Add</button>
-      <button onClick={handleRemove}>Remove</button>
+
+      <button
+        type="button"
+        ref={setTriggerRefAdd}
+      >
+        Add
+      </button>
+
+      {visibleAdd && (
+        <div
+          ref={setTooltipRefAdd}
+          {...getTooltipPropsAdd({ className: 'tooltip-container' })}
+        >
+          <div {...getArrowPropsAdd({ className: 'tooltip-arrow' })} />
+          <form>
+            <input type="text" placeholder="Name" />
+            <select>
+              <option value="" disabled selected>List Type</option>
+              <option value="type1">Type 1</option>
+              <option value="type2">Type 2</option>
+              {/* Add more options as needed */}
+            </select>
+            <select>
+              <option value="" disabled selected>Category</option>
+              <option value="category1">Category 1</option>
+              <option value="category2">Category 2</option>
+              {/* Add more options as needed */}
+            </select>
+          </form>
+        </div>
+      )}
+      <button
+        type="button"
+        ref={setTriggerRefRemove}
+      >
+        Remove
+      </button>
+      {visibleRemove && (
+        <div
+          ref={setTooltipRefRemove}
+          {...getTooltipPropsRemove({ className: 'tooltip-container' })}
+        >
+          <div {...getArrowPropsRemove({ className: 'tooltip-arrow' })} />
+          <form>
+            <input type="text" placeholder="Name" />
+          </form>
+        </div>
+      )}
 
       {/* Daily Items */}
       <div className='daily-items'>

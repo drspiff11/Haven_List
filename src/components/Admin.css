@@ -20,3 +20,19 @@
 .sticky-button.checked {
     background-color: #d66819; /* Darker shade for checked state */
 }
+
+
+#button-tooltip{
+    background-color: white;
+    border: 1px solid #ccc; /* or any color you prefer */
+}
+
+#admin-header{
+    margin-bottom: 3em;
+}
+
+.custom-dropdown {
+    color: inherit;
+    background-color: white;
+
+}
