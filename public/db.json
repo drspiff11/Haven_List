@@ -19,12 +19,6 @@
       "isVisible": false
     },
     {
-      "id": 3,
-      "name": "Yellow Onions",
-      "category": "Extras",
-      "isVisible": false
-    },
-    {
       "id": 4,
       "name": "Whole Almonds",
       "category": "USDA",
@@ -36,12 +30,6 @@
       "id": 2,
       "name": "Canned Chicken",
       "category": "Canned Meat",
-      "isVisible": false
-    },
-    {
-      "id": 3,
-      "name": "White Rice",
-      "category": "Dry",
       "isVisible": false
     },
     {
