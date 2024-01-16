@@ -18,6 +18,12 @@ const Admin = () => {
   const [removeSearchTerm, setRemoveSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [itemName, setItemName] = useState('');
+  const [itemCategory, setItemCategory] = useState('');
+  const [listType, setListType] = useState('');
+  const [categoryOptions, setCategoryOptions] = useState(<option value="" disabled selected>Select List Type First</option>);
+  const [category, setCategory] = useState(''); // Add this line
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   const options = [
@@ -51,8 +57,55 @@ const Admin = () => {
     setFilteredItems(newFilteredItems);
   }, [removeSearchTerm, dailyItems, monthlyItems]); // This hook runs every time removeSearchTerm, dailyItems, or monthlyItems changes
 
+  useEffect(() => {
+    if (listType === 'daily') {
+      setCategoryOptions(
+        <>
+          <option value="dailyCategory1">Daily Category 1</option>
+          <option value="dailyCategory2">Daily Category 2</option>
+        </>
+      );
+    } else if (listType === 'monthly') {
+      setCategoryOptions(
+        <>
+          <option value="monthlyCategory1">Dry</option>
+          <option value="monthlyCategory2">Monthly Category 2</option>
+        </>
+      );
+    } else {
+      setCategoryOptions(<option value="" disabled>Select List Type First</option>);
+    }
+  }, [listType]);
+  
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleAddSubmit = (event) => {
+    console.log('handleAddSubmit called');
+    event.preventDefault();
+    console.log('Creating new item');
+    const newItem = {
+      name: itemName,
+      category: itemCategory,
+      isVisible: false,
+    };
+    console.log('Sending POST request');
+    axios.post(`http://localhost:3000/${listType}Items`, newItem)
+      .then(response => {
+        if (listType === 'daily') {
+          setDailyItems([...dailyItems, response.data]);
+        } else if (listType === 'monthly') {
+          setMonthlyItems([...monthlyItems, response.data]);
+        }
+  
+        setItemName('');
+        setItemCategory('');
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
 
   // This function handles the submit button click
@@ -109,6 +162,17 @@ const Admin = () => {
     }
   };
 
+  const fetchCategories = (listType) => {
+    axios.get(`http://localhost:3000/${listType}Items`)
+      .then(response => {
+        const fetchedCategories = response.data.map(item => item.category);
+        const uniqueCategories = [...new Set(fetchedCategories)];
+        setCategories(uniqueCategories);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+  };
 
   const handleRemoveChange = (selectedOption) => {
     setSelectedItem(selectedOption);
@@ -125,12 +189,54 @@ const Admin = () => {
     setSelectedItem(item);
   };
 
+  const handleListTypeChange = (event) => {
+    setListType(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+  
+
   const handleAdd = () => {
     console.log('Add functionality to be implemented');
   };
 
   const handleRemove = () => {
     console.log('Remove functionality to be implemented');
+  };
+
+  const getCategoryOptions = () => {
+    if (listType === 'daily') {
+      return (
+        <>
+          <option value="produce">Produce</option>
+          <option value="bakery">Bakery</option>
+          <option value="daily-extras">Daily Extras</option>
+          <option value="usda">USDA</option>
+        </>
+      );
+    } else if (listType === 'monthly') {
+      return (
+        <>
+          <option value="canned-meat">Canned Meat</option>
+          <option value="canned-goods">Canned Goods</option>
+          <option value="dry">Dry Goods</option>
+          <option value="beans">Canned Beans</option>
+          <option value="veg">Vegetables</option>
+          <option value="fruit">Canned Fruit</option>
+          <option value="soup">Canned Soup</option>
+          <option value="monthly-extras">Monthly Extras</option>
+          <option value="personal">Personal Care</option>
+          <option value="child">Childcare</option>
+          <option value="pet">Pet Products</option>
+          <option value="dairy">Dairy</option>
+          <option value="meat">Meat</option>
+        </>
+      );
+    } else {
+      return <option value="">Select List Type First</option>;
+    }
   };
 
   const filteredDailyItems = searchTerm ? dailyItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())) : dailyItems;
@@ -226,21 +332,23 @@ const Admin = () => {
                 <div id="add-collapse-text">
                   {visibleAdd && (
                     <>
-                      <form>
-                        <input type="text" placeholder="Name" />
-                        <select>
+                      <form onSubmit={handleAddSubmit}>
+                        <input
+                          type="text"
+                          placeholder="Name"
+                          value={itemName}
+                          onChange={event => setItemName(event.target.value)}
+                        />
+                        <select value={listType} onChange={handleListTypeChange}>
                           <option value="" disabled selected>List Type</option>
-                          <option value="type1">Type 1</option>
-                          <option value="type2">Type 2</option>
+                          <option value="daily">Daily</option>
+                          <option value="monthly">Monthly</option>
                           {/* Add more options as needed */}
                         </select>
-                        <select>
-                          <option value="" disabled selected>Category</option>
-                          <option value="category1">Category 1</option>
-                          <option value="category2">Category 2</option>
-                          {/* Add more options as needed */}
+                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                            {getCategoryOptions()}
                         </select>
-                        <button type="submit" onClick={handleAdd}>Submit</button>
+                        <button type="submit">Submit</button>
                       </form>
                     </>
                   )}

@@ -23,6 +23,12 @@
       "name": "Whole Almonds",
       "category": "USDA",
       "isVisible": false
+    },
+    {
+      "name": "Desserts",
+      "category": "",
+      "isVisible": false,
+      "id": 5
     }
   ],
   "monthlyItems": [
@@ -145,6 +151,12 @@
       "name": "Applesauce",
       "category": "Fruit",
       "isVisible": false
+    },
+    {
+      "name": "Pear Halves",
+      "category": "",
+      "isVisible": false,
+      "id": 26
     }
   ],
   "orders": []
