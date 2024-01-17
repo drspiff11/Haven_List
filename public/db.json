@@ -4,31 +4,43 @@
       "id": 0,
       "name": "Yellow Onions",
       "category": "Produce",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 1,
       "name": "Potatoes",
       "category": "Produce",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 2,
       "name": "Baguette",
       "category": "Bakery",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 4,
       "name": "Whole Almonds",
       "category": "USDA",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "name": "Desserts",
-      "category": "",
-      "isVisible": false,
+      "category": "Bakery",
+      "isVisible": true,
       "id": 5
+    },
+    {
+      "name": "Green Beans",
+      "category": "Produce",
+      "isVisible": true,
+      "id": 6
+    },
+    {
+      "name": "Italian Bread",
+      "category": "Bakery",
+      "isVisible": true,
+      "id": 7
     }
   ],
   "monthlyItems": [
@@ -36,128 +48,364 @@
       "id": 2,
       "name": "Canned Chicken",
       "category": "Canned Meat",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 4,
       "name": "Brown Rice",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 5,
       "name": "Mac and Cheese",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 6,
       "name": "Spaghetti",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 7,
       "name": "Penne",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 8,
       "name": "Elbows",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 9,
       "name": "Egg Noodle",
       "category": "Dry",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 10,
       "name": "Black Beans",
       "category": "Beans",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 11,
       "name": "Red Kidney Beans",
       "category": "Beans",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 12,
       "name": "Pinto Beans",
       "category": "Beans",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 13,
       "name": "Garbanzo Beans",
       "category": "Beans",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 14,
       "name": "Corn",
       "category": "Vegetables",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 15,
       "name": "Peas",
       "category": "Vegetables",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 16,
       "name": "Green Beans",
       "category": "Vegetables",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 17,
       "name": "Carrots",
       "category": "Vegetables",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 18,
       "name": "Mixed Vegetables",
       "category": "Vegetables",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 19,
       "name": "Mandarin Oranges",
       "category": "Fruit",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 20,
       "name": "Sliced Peaches",
       "category": "Fruit",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 21,
       "name": "Fruit Cocktail",
       "category": "Fruit",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "id": 22,
       "name": "Applesauce",
       "category": "Fruit",
-      "isVisible": false
+      "isVisible": true
     },
     {
       "name": "Pear Halves",
-      "category": "",
-      "isVisible": false,
+      "category": "Fruit",
+      "isVisible": true,
       "id": 26
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "firstName": "Chris",
+      "lastName": "Sheehy",
+      "isAnonymous": false,
+      "householdSize": "2",
+      "selectedState": "Vermont",
+      "notes": "",
+      "selectedDailyItems": [
+        0,
+        1
+      ],
+      "selectedMonthlyItems": [
+        13,
+        15,
+        18
+      ],
+      "dailyItems": [
+        {
+          "id": 0,
+          "name": "Yellow Onions",
+          "category": "Produce",
+          "isVisible": true
+        },
+        {
+          "id": 1,
+          "name": "Potatoes",
+          "category": "Produce",
+          "isVisible": true
+        }
+      ],
+      "monthlyItems": [
+        {
+          "id": 13,
+          "name": "Garbanzo Beans",
+          "category": "Beans",
+          "isVisible": true
+        },
+        {
+          "id": 15,
+          "name": "Peas",
+          "category": "Vegetables",
+          "isVisible": true
+        },
+        {
+          "id": 18,
+          "name": "Mixed Vegetables",
+          "category": "Vegetables",
+          "isVisible": true
+        }
+      ],
+      "id": 1
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "isAnonymous": false,
+      "pickUpPerson": "",
+      "householdSize": "",
+      "selectedState": "",
+      "vehicle": "",
+      "pager": "",
+      "time": "",
+      "dietary": "",
+      "wishlist": "",
+      "selectedDailyItems": [],
+      "selectedMonthlyItems": [],
+      "dailyItems": [],
+      "monthlyItems": [],
+      "id": 2
+    },
+    {
+      "firstName": "Chris",
+      "lastName": "Sheehy",
+      "isAnonymous": false,
+      "pickUpPerson": "",
+      "householdSize": "2",
+      "selectedState": "Vermont",
+      "vehicle": "Black Buick",
+      "pager": "21",
+      "dietary": "no tomato",
+      "wishlist": "raspberry oat bars",
+      "includeDaily": true,
+      "includeMonthly": true,
+      "selectedDailyItems": [
+        7,
+        0,
+        1,
+        6
+      ],
+      "selectedMonthlyItems": [
+        9,
+        5,
+        6,
+        2,
+        10,
+        12,
+        20,
+        15
+      ],
+      "dailyItems": [
+        {
+          "id": 0,
+          "name": "Yellow Onions",
+          "category": "Produce",
+          "isVisible": true
+        },
+        {
+          "id": 1,
+          "name": "Potatoes",
+          "category": "Produce",
+          "isVisible": true
+        },
+        {
+          "name": "Green Beans",
+          "category": "Produce",
+          "isVisible": true,
+          "id": 6
+        },
+        {
+          "name": "Italian Bread",
+          "category": "Bakery",
+          "isVisible": true,
+          "id": 7
+        }
+      ],
+      "monthlyItems": [
+        {
+          "id": 2,
+          "name": "Canned Chicken",
+          "category": "Canned Meat",
+          "isVisible": true
+        },
+        {
+          "id": 5,
+          "name": "Mac and Cheese",
+          "category": "Dry",
+          "isVisible": true
+        },
+        {
+          "id": 6,
+          "name": "Spaghetti",
+          "category": "Dry",
+          "isVisible": true
+        },
+        {
+          "id": 9,
+          "name": "Egg Noodle",
+          "category": "Dry",
+          "isVisible": true
+        },
+        {
+          "id": 10,
+          "name": "Black Beans",
+          "category": "Beans",
+          "isVisible": true
+        },
+        {
+          "id": 12,
+          "name": "Pinto Beans",
+          "category": "Beans",
+          "isVisible": true
+        },
+        {
+          "id": 15,
+          "name": "Peas",
+          "category": "Vegetables",
+          "isVisible": true
+        },
+        {
+          "id": 20,
+          "name": "Sliced Peaches",
+          "category": "Fruit",
+          "isVisible": true
+        }
+      ],
+      "id": 3
+    },
+    {
+      "firstName": "Chris",
+      "lastName": "Sheehy",
+      "isAnonymous": false,
+      "pickUpPerson": "",
+      "householdSize": "2",
+      "selectedState": "Vermont",
+      "vehicle": "Black Buick",
+      "pager": "30",
+      "dietary": "no tomato",
+      "wishlist": "garlic bread",
+      "includeDaily": true,
+      "includeMonthly": false,
+      "selectedDailyItems": [
+        2,
+        0,
+        1
+      ],
+      "selectedMonthlyItems": [
+        6,
+        7
+      ],
+      "dailyItems": [
+        {
+          "id": 0,
+          "name": "Yellow Onions",
+          "category": "Produce",
+          "isVisible": true
+        },
+        {
+          "id": 1,
+          "name": "Potatoes",
+          "category": "Produce",
+          "isVisible": true
+        },
+        {
+          "id": 2,
+          "name": "Baguette",
+          "category": "Bakery",
+          "isVisible": true
+        }
+      ],
+      "monthlyItems": [
+        {
+          "id": 6,
+          "name": "Spaghetti",
+          "category": "Dry",
+          "isVisible": true
+        },
+        {
+          "id": 7,
+          "name": "Penne",
+          "category": "Dry",
+          "isVisible": true
+        }
+      ],
+      "id": 4
+    }
+  ]
 }

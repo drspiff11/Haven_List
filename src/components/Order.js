@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import './Order.css';
 
@@ -12,13 +13,20 @@ function Order() {
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [pickUpPerson, setPickUp] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [householdSize, setHouseholdSize] = useState('');
   const [selectedState, setSelectedState] = useState('');
-  const [notes, setNotes] = useState('');
-  const [showMonthly, setShowMonthly] = useState(false); // New state to toggle between daily and monthly lists
+  const [vehicle, setVehicle] = useState('');
+  const [pager, setPager] = useState('');
+  const [dietary, setDietary] = useState('');
+  const [wishlist, setWishlist] = useState('');
+  const [showMonthly, setShowMonthly] = useState(false); // New state to toggle between daily 
+  const [includeDaily, setIncludeDaily] = useState(false);
+  const [includeMonthly, setIncludeMonthly] = useState(false);
   const [selectedDailyItems, setSelectedDailyItems] = useState(new Set());
   const [selectedMonthlyItems, setSelectedMonthlyItems] = useState(new Set());
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -88,9 +96,15 @@ function Order() {
         firstName,
         lastName,
         isAnonymous,
+        pickUpPerson,
         householdSize,
         selectedState,
-        notes,
+        vehicle,
+        pager, 
+        dietary,
+        wishlist,
+        includeDaily, // Add this line
+        includeMonthly, // Add this line
         selectedDailyItems: Array.from(selectedDailyItems),
         selectedMonthlyItems: Array.from(selectedMonthlyItems),
         dailyItems: filteredDailyItems,
@@ -99,7 +113,7 @@ function Order() {
   
       await axios.post('http://localhost:3000/orders', orderData);
       console.log("Order Data:", orderData);
-      navigate('/report', { state: { orderData } });
+      navigate('/ticket', { state: { orderData } });
       console.log("Navigate called");
     } catch (error) {
       console.error('Error placing order:', error);
@@ -109,14 +123,30 @@ function Order() {
 
   return (
     <div>
-      <header className="header">
-        <nav className="nav">
-          <Link to="/admin" className="nav-link">Admin</Link>
-          <Link to="/" className="nav-link">Home</Link>
-        </nav>
-      </header>
+      <Header />  
 
-      <form>
+        <form>
+              <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+              <label style={{marginRight: '20px'}}>
+                <input
+                  type="checkbox"
+                  id="daily"
+                  checked={includeDaily}
+                  onChange={(e) => setIncludeDaily(e.target.checked)}
+                />
+                Daily
+              </label>
+
+              <label>
+                <input
+                  type="checkbox"
+                  id="monthly"
+                  checked={includeMonthly}
+                  onChange={(e) => setIncludeMonthly(e.target.checked)}
+                />
+                Monthly
+              </label>
+            </div>
             <input
               type="text"
               placeholder="First Name"
@@ -130,6 +160,12 @@ function Order() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               disabled={isAnonymous}
+            />
+            <input
+              type="text"
+              placeholder="Pick-Up Person"
+              value={pickUpPerson}
+              onChange={(e) => setPickUp(e.target.value)}
             />
             <div className="anonymous-checkbox">
             <label>
@@ -147,16 +183,36 @@ function Order() {
               placeholder="Size of Household"
               value={householdSize}
               onChange={(e) => setHouseholdSize(e.target.value)}
+              min="0"
+              max="25"
             />
             <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)}>
               <option value="" disabled selected>State</option>
               <option value="Vermont">Vermont</option>
               <option value="New Hampshire">New Hampshire</option>
             </select>
+            <input
+              type="text"
+              placeholder="Vehicle"
+              value={vehicle}
+              onChange={(e) => setVehicle(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Pager Number"
+              value={pager}
+              onChange={(e) => setPager(e.target.value)}
+              min="0"
+            />
             <textarea
-              placeholder="Notes"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Dietary Restrictions"
+              value={dietary}
+              onChange={(e) => setDietary(e.target.value)}
+            />
+            <textarea
+              placeholder="Wishlist"
+              value={wishlist}
+              onChange={(e) => setWishlist(e.target.value)}
             />
       </form>
 
@@ -166,20 +222,20 @@ function Order() {
 
       <h2>{showMonthly ? 'Monthly List:' : 'Daily List:'}</h2>
       <div className="list-container">
-        {Object.keys(categorizedItems).map((category) => (
-          <div key={category}>
-            <h3>{category}</h3>
-            {categorizedItems[category].map((item) => (
-              <div 
-                key={item.id} 
-                className={`food-item-order ${selectedDailyItems.has(item.id) && !showMonthly || selectedMonthlyItems.has(item.id) && showMonthly ? 'selected' : ''}`}
-                onClick={() => handleItemClick(item.id, showMonthly)}
-              >
-                <div>{item.name}</div>
-              </div>
-            ))}
-          </div>
-        ))}
+      {Object.keys(categorizedItems).map((category) => (
+        <div key={category}>
+          <h3>{category}</h3>
+          {categorizedItems[category].filter(item => item.isVisible).map((item) => (
+            <div 
+              key={item.id} 
+              className={`food-item-order ${selectedDailyItems.has(item.id) && !showMonthly || selectedMonthlyItems.has(item.id) && showMonthly ? 'selected' : ''}`}
+              onClick={() => handleItemClick(item.id, showMonthly)}
+            >
+              <div>{item.name}</div>
+            </div>
+          ))}
+        </div>
+      ))}
       </div>
 
       <button type="button" onClick={placeOrder}>Place Order</button>

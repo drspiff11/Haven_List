@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/family=Work+Sans:wght@600&display=swap');
+
+.report p{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.report h1{
+    margin-top:1em;
+    margin-bottom: .5em;
+}
+
+.report h2{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #000;
+    margin-top: 1em;
+    padding: 0;
+}
+
+.report ul{
+    text-align: left;
+    list-style-type: none;
+    margin-bottom: 5%;
+}
+
+.report li {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.report li::before {
+    content: '□ ';
+    font-size: 2em;
+  }
+
+  .report table {
+    width: 80%; /* Reduce the width of the table */
+    border-collapse: collapse;
+    margin: auto; /* Center the table */
+}
+  
+.report td {
+    border: 1px solid #000;
+    font-weight: 550;
+    font-family: 'Work Sans', sans-serif;
+    text-align: left;
+    padding: 20px; /* Reduce the padding of the table data */
+}
+
+
+.report .items .item-column {
+    /* Ensure uniform styling for both columns */
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+
+.report table tr:last-child td {
+    text-align: left;
+  }
+
+  #report-timestamp {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    font-size: smaller;
+}
+
+@media print {
+    #report-timestamp {
+      display: none;
+    }
+  }
+
+.report .monthly-list {
+    page-break-before: always;
+}
+
+/* Use this on the container that wraps all category containers */
+.report .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Creates a responsive number of columns */
+    gap: 20px; /* Adjust the space between the columns */
+  }
+  
+  /* This will be applied to each category container */
+  .report .category-container {
+    display: grid;
+    grid-template-rows: auto 1fr; /* Creates two row tracks, one for the header and one for the list */
+    align-items: start; /* Aligns the content to the start of the grid area */
+  }
+  
+  /* Style for the category headers */
+  .report .category-container h3 {
+    grid-row: 1; /* Places the header in the first row */
+    font-family: Arial, Helvetica, sans-serif
+  }
+  
+  /* Style for the lists */
+  .report .category-container ul {
+    padding-left: 0; /* Removes default padding */
+    list-style: none; /* Removes bullet points */
+    grid-row: 2; /* Places the list in the second row */
+  }
+  
+  /* Adjust list item and checkbox styling */
+  .report li {
+    display: flex;
+    align-items: center; /* Centers items vertically */
+  }
+  
+  .report li::before {
+    content: '□'; /* Custom checkbox */
+    margin-right: 0.5em; /* Space between checkbox and text */
+    font-size: 2em; /* Adjust size as needed */
+    line-height: 1; /* Aligns checkbox with text */
+  }
+  

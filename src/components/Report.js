@@ -1,30 +1,88 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './Report.css'; // Ensure you have this CSS file for styling
 
 function Report() {
-    const location = useLocation();
-    const { firstName, lastName, isAnonymous, householdSize, selectedState, notes, selectedItems, dailyItems, monthlyItems } = location.state.orderData;
+  const [dailyItems, setDailyItems] = useState([]);
+  const [monthlyItems, setMonthlyItems] = useState([]);
+  const sortedDailyItems = [...dailyItems].sort((a, b) => a.category.localeCompare(b.category));
+  const sortedMonthlyItems = [...monthlyItems].sort((a, b) => a.category.localeCompare(b.category));
+
+
+  const groupByCategory = (items) => {
+    return items.reduce((groupedItems, item) => {
+      (groupedItems[item.category] = groupedItems[item.category] || []).push(item);
+      return groupedItems;
+    }, {});
+  };
+
+
+  const groupedDailyItems = groupByCategory(dailyItems);
+  const groupedMonthlyItems = groupByCategory(monthlyItems);
+
+
+  useEffect(() => {
+    fetch('/db.json')
+      .then(response => response.json())
+      .then(data => {
+        setDailyItems(data.dailyItems.filter(item => item.isVisible));
+        setMonthlyItems(data.monthlyItems.filter(item => item.isVisible));
+      });
+  }, []);
+
+
+
   
     return (
-      <div>
+      <div className="report">
+        <p id='report-timestamp'>Timestamp: {new Date().toLocaleString()}</p>
         <h1>Order Summary</h1>
-        <p>Name: {isAnonymous ? 'Anonymous' : `${firstName} ${lastName}`}</p>
-        <p>Household Size: {householdSize}</p>
-        <p>State: {selectedState}</p>
-        <p>Notes: {notes}</p>
-        <h2>Selected Items</h2>
-        <ul>
-          {selectedItems && selectedItems.map(item => <li key={item}>{item}</li>)}
-        </ul>
+        <table>
+          <tbody>
+            <tr>
+              <td>Name: </td>
+              <td>Pick Up Person:</td>
+            </tr>
+            <tr>
+              <td>Household Size: </td>
+              <td>State: </td>
+            </tr>
+            <tr>
+              <td>Vehicle: </td>
+              <td>Pager Number: </td>
+            </tr>
+            <tr>
+              <td>Time: </td>
+              <td>Dietary Restrictions: </td>
+            </tr>
+            <tr>
+              <td colSpan="2 ">Wishlist: </td>
+            </tr>
+          </tbody>
+        </table>
         <h2>Daily Items</h2>
-        <ul>
-          {dailyItems && dailyItems.map(item => <li key={item.id}>{item.name}</li>)}
-        </ul>
-        <h2>Monthly Items</h2>
-        <ul>
-          {monthlyItems && monthlyItems.map(item => <li key={item.id}>{item.name}</li>)}
-        </ul>
+          <div className="grid-container">
+            {Object.entries(groupedDailyItems).map(([category, items]) => (
+              <div key={category} className="category-container">
+                <h3>{category}</h3>
+                <ul>
+                  {items.map(item => <li key={item.id}>{item.name}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="monthly-list" style={{ pageBreakBefore: "always" }}>
+            <h2>Monthly Items</h2>
+            <div className="grid-container">
+              {Object.entries(groupedMonthlyItems).map(([category, items]) => (
+                <div key={category} className="category-container">
+                  <h3>{category}</h3>
+                  <ul>
+                    {items.map(item => <li key={item.id}>{item.name}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
       </div>
     );
   }

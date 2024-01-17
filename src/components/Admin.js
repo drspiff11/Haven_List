@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Collapse } from 'react-bootstrap';
+import Header from './Header';
 import Select from 'react-select';
 import './Admin.css';
 
 const Admin = () => {
   const [dailyItems, setDailyItems] = useState([]);
   const [monthlyItems, setMonthlyItems] = useState([]);
+  const [selectedDailyItems, setSelectedDailyItems] = useState(new Set());
+  const [selectedMonthlyItems, setSelectedMonthlyItems] = useState(new Set());
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -82,6 +85,50 @@ const Admin = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleSelectionChange = (itemId, isSelected, isDailyItem) => {
+    if (isDailyItem) {
+      setSelectedDailyItems(prevSelectedItems => {
+        const newSelectedItems = new Set(prevSelectedItems);
+        if (isSelected) {
+          newSelectedItems.add(itemId);
+        } else {
+          newSelectedItems.delete(itemId);
+        }
+        return newSelectedItems;
+      });
+    } else {
+      setSelectedMonthlyItems(prevSelectedItems => {
+        const newSelectedItems = new Set(prevSelectedItems);
+        if (isSelected) {
+          newSelectedItems.add(itemId);
+        } else {
+          newSelectedItems.delete(itemId);
+        }
+        return newSelectedItems;
+      });
+    }
+  };
+
+  const handleItemSelection = (itemId, isDailyItem) => {
+    if (isDailyItem) {
+      if (selectedDailyItems.has(itemId)) {
+        selectedDailyItems.delete(itemId);
+      } else {
+        selectedDailyItems.add(itemId);
+      }
+      setSelectedDailyItems(new Set(selectedDailyItems));
+      console.log('selectedDailyItems:', Array.from(selectedDailyItems));
+    } else {
+      if (selectedMonthlyItems.has(itemId)) {
+        selectedMonthlyItems.delete(itemId);
+      } else {
+        selectedMonthlyItems.add(itemId);
+      }
+      setSelectedMonthlyItems(new Set(selectedMonthlyItems));
+      console.log('selectedMonthlyItems:', Array.from(selectedMonthlyItems));
+    }
+  };
+
   const handleAddSubmit = (event) => {
     console.log('handleAddSubmit called');
     event.preventDefault();
@@ -136,31 +183,72 @@ const Admin = () => {
     }
   };
 
+  const updateItemVisibility = async (item, isVisible, url) => {
+    const updatedItem = { ...item, isVisible };
+    try {
+      const response = await axios.put(`${url}/${item.id}`, updatedItem);
+      console.log('Server response:', response);
+    } catch (error) {
+      console.error(`Error updating item ${item.id}:`, error);
+    }
+  };
+
   const handleSubmit = async () => {
     try {
-      for (const item of dailyItems) {
-        await axios.put(`http://localhost:3000/dailyItems/${item.id}`, { ...item, isVisible: item.isVisible });
+      // Update visibility for selected daily items
+      for (const itemId of selectedDailyItems) {
+        const item = dailyItems.find(i => i.id === itemId);
+        if (item) {
+          await updateItemVisibility(item, true, 'http://localhost:3000/dailyItems');
+        }
       }
-
-      for (const item of monthlyItems) {
-        await axios.put(`http://localhost:3000/monthlyItems/${item.id}`, { ...item, isVisible: item.isVisible });
+  
+      // Update visibility for selected monthly items
+      for (const itemId of selectedMonthlyItems) {
+        const item = monthlyItems.find(i => i.id === itemId);
+        if (item) {
+          await updateItemVisibility(item, true, 'http://localhost:3000/monthlyItems');
+        }
       }
-
-      navigate('/');
+  
+      // Optionally, you can clear selected items after update
+      setSelectedDailyItems(new Set());
+      setSelectedMonthlyItems(new Set());
+  
     } catch (error) {
       console.error('Error updating lists:', error);
     }
   };
+  
 
-  const handleCheckboxChange = (item, type) => {
-    const updatedItem = { ...item, isVisible: !item.isVisible };
+  
 
-    if (type === 'daily') {
-      setDailyItems(dailyItems.map(i => i.id === item.id ? updatedItem : i));
-    } else if (type === 'monthly') {
-      setMonthlyItems(monthlyItems.map(i => i.id === item.id ? updatedItem : i));
+// Refactored handleCheckboxChange
+const handleCheckboxChange = (item, type) => {
+  const updatedItem = { ...item, isVisible: !item.isVisible };
+
+  if (type === 'daily') {
+    setDailyItems(dailyItems.map(i => i.id === item.id ? updatedItem : i));
+    updateSelectionState(item.id, updatedItem.isVisible, setSelectedDailyItems);
+  } else if (type === 'monthly') {
+    setMonthlyItems(monthlyItems.map(i => i.id === item.id ? updatedItem : i));
+    updateSelectionState(item.id, updatedItem.isVisible, setSelectedMonthlyItems);
+  }
+};
+
+// Utility function to update the selection state
+const updateSelectionState = (itemId, isSelected, setSelectionState) => {
+  setSelectionState(prevSelectedItems => {
+    const newSelectedItems = new Set(prevSelectedItems);
+    if (isSelected) {
+      newSelectedItems.add(itemId);
+    } else {
+      newSelectedItems.delete(itemId);
     }
-  };
+    return newSelectedItems;
+  });
+};
+
 
   const fetchCategories = (listType) => {
     axios.get(`http://localhost:3000/${listType}Items`)
@@ -210,10 +298,10 @@ const Admin = () => {
     if (listType === 'daily') {
       return (
         <>
-          <option value="produce">Produce</option>
-          <option value="bakery">Bakery</option>
-          <option value="daily-extras">Daily Extras</option>
-          <option value="usda">USDA</option>
+          <option value="Produce">Produce</option>
+          <option value="Bakery">Bakery</option>
+          <option value="Daily Extras">Daily Extras</option>
+          <option value="USDA">USDA</option>
         </>
       );
     } else if (listType === 'monthly') {
@@ -254,12 +342,7 @@ const Admin = () => {
 
   return (
     <div>
-      <header className="header">
-        <nav className="nav">
-          <Link to="/order" className="nav-link">Order</Link>
-          <Link to="/" className="nav-link">Home</Link>
-        </nav>
-      </header>
+      <Header /> 
       <h1 id="admin-header">Admin Panel</h1>
 
       <Button
@@ -345,8 +428,8 @@ const Admin = () => {
                           <option value="monthly">Monthly</option>
                           {/* Add more options as needed */}
                         </select>
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            {getCategoryOptions()}
+                        <select value={itemCategory} onChange={(e) => setItemCategory(e.target.value)}>
+                          {getCategoryOptions()}
                         </select>
                         <button type="submit">Submit</button>
                       </form>

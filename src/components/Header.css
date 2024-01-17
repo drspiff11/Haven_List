@@ -1,0 +1,33 @@
+/* Header Styling */
+header {
+    width: 100%;       /* Span the full width of the page */
+    margin-top: 0;     /* Start from the very top of the page */
+    background-color: #0054a6; /* Example background color */
+    margin: 0;         /* Reset margin to ensure no space around */
+    padding: 0;  
+  }
+
+/* Navigation Styling */
+.nav-link {
+    font-family: 'Work Sans', sans-serif;
+    color: #fff; /* White text color for contrast */
+    background-color: #ff6900; /* Orange shade similar to the logo */
+    text-decoration: none; /* Removes the underline */
+    padding: 15px 30px; /* Padding to increase the size of the clickable area */
+    margin: 5px 15px; /* Margin around each navigation item */
+    display: inline-block; /* Allows applying padding and margin correctly */
+    border: none; /* No border for a button-like appearance */
+    border-radius: 4px; /* Rounded corners for a button-like look */
+    cursor: pointer; /* Cursor changes to a pointer to indicate a clickable element */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    list-style-type: none; /* Remove bullet points, in case it's inside a list */
+    margin-bottom: 20px; /* Spacing below the navigation */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for depth */
+    float: right;
+  }
+  
+  .nav-link:hover, .nav-link:focus {
+    background-color: #e05d00; /* Slightly darker orange shade for hover state */
+    text-decoration: none; /* Ensures text decoration does not reappear on hover */
+  }
+

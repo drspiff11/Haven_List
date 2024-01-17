@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { MenuOutlined } from '@ant-design/icons';
+import Header from './Header';
 import './Home.css'; // Ensure you have this CSS file in your project
 
 function Home() {
@@ -10,6 +12,8 @@ function Home() {
   const [error, setError] = useState(null);
   const [showMonthly, setShowMonthly] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [dailyItems, setDailyItems] = useState([]);
+  const [monthlyItems, setMonthlyItems] = useState([]);
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -54,12 +58,7 @@ function Home() {
   return (
     
     <div className="container">
-      <header className="header">
-      <nav className="nav">
-        <Link to="/admin" className="nav-link">Admin</Link>
-        <Link to="/order" className="nav-link">Place Order</Link>
-      </nav>
-      </header>
+      <Header /> 
 
       <div className="item-list">
       <h1>Today's Food Shelf List</h1>

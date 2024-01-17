@@ -1,36 +1,52 @@
+:root {
+  --font-family-work-sans: 'Work Sans', sans-serif;
+  --color-black: #0b0b0b;
+  --color-orange: #f88635;
+  --color-dark-orange: #d66819;
+  --color-blue: #0054a6;
+  --color-dark-blue: #003d7a;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/family=Work+Sans:wght@600&display=swap');
 
+.list-container,
+.food-item-order,
+.food-item-order div,
+input,
+.anonymous-checkbox {
+  font-family: var(--font-family-work-sans);
+}
+
 .list-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates a 3-column layout */
-  gap: 20px; /* Adjust the gap between columns as needed */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   padding: 20px;
-  align-items: start; /* This ensures that all items align at the top */
+  align-items: start;
 }
 
 .list-container > div {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligns children (h3 and items) to the top */
+  justify-content: flex-start;
   margin-top: 20px;
 }
 
 .list-container h3 {
-  margin-top: 0; /* Adjust to the height of your tallest category title */
+  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .food-item-order {
-  background-color: #f88635;
-  font-family: 'Work Sans', sans-serif;
+  background-color: var(--color-orange);
   color: #fff;
   padding: 2%;
   font-weight: bold;
   text-align: center;
-  border:none;
+  border: none;
   border-radius: 0px;
   position: relative;
   cursor: pointer;
@@ -38,31 +54,21 @@
 
 .food-item-order div {
   padding: 5%;
-  font-family: 'Work Sans', sans-serif;
 }
 
-.food-item-order:hover {
-  background-color: #d66819;
-}
-
+.food-item-order:hover,
 .food-item-order.selected {
-  background-color: #d66819; /* Background color for selected state, similar to hover state */
+  background-color: var(--color-dark-orange);
 }
 
-
-input{
-  color: #0b0b0b; 
-  font-family: 'Work Sans', sans-serif;
+input {
+  color: var(--color-black);
   padding: 1%;
-  border:none;
-}
-
-input[type='text']{
-  
+  border: none;
 }
 
 input[type="text"]::placeholder {
-  color: #0b0b0b; 
+  color: var(--color-black);
 }
 
 input[type='number'] {
@@ -70,33 +76,23 @@ input[type='number'] {
   width: 4em;
 }
 
-input[type='number']::placeholder {
-
-}
-
-/* Form Elements Styling */
-
-/* Style all input types */
 input[type="text"], input[type="email"], input[type="number"], select, textarea {
-  font-family: 'Work Sans', sans-serif; /* Consistent font */
-  padding: 10px; /* Padding for better readability */
-  margin: 5px 0 20px 0; /* Spacing between elements */
-  border: 1px solid #ccc; /* Subtle border */
-  border-radius: 4px; /* Rounded corners */
-  box-sizing: border-box; /* Box sizing */
-  width: 60%; /* Full width */
-  transition: border-color 0.3s; /* Smooth transition for border color */
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 60%;
+  transition: border-color 0.3s;
 }
 
-/* Style the focus state of inputs for better accessibility */
 input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
-  border-color: #ff6900; /* Highlight color for focus */
-  outline: none; /* Remove default focus outline */
+  border-color: #ff6900;
+  outline: none;
 }
 
-/* Style for form buttons */
- button, input[type="submit"] {
-  background-color: #0054a6; /* Consistent button color */
+button, input[type="submit"] {
+  background-color: var(--color-blue);
   color: white;
   font-size: larger;
   padding: 14px 20px;
@@ -105,32 +101,28 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus,
   border-radius: 4px;
   cursor: pointer;
   width: 50%;
-  transition: background-color 0.3s; /* Transition for hover effect */
+  transition: background-color 0.3s;
 }
 
-/* Hover effect for buttons */
 button:hover, input[type="submit"]:hover {
-  background-color: #003d7a;
+  background-color: var(--color-dark-blue);
 }
 
 .anonymous-checkbox {
-  font-family: 'Work Sans', sans-serif;
   font-weight:550;
   font-size: medium;
   display: block;
-  margin-top: 10px; /* Adjust as needed */
-  margin-bottom: 10px; /* Adjust as needed */
-  
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-input[type="checkbox"]{
-  margin-right: 5px; /* Adjust as needed */
+input[type="checkbox"] {
+  margin-right: 5px;
 }
 
-/* Responsive design */
 @media screen and (max-width: 600px) {
   input[type="text"], input[type="email"], input[type="number"], select, textarea, button, input[type="submit"] {
-    width: 100%; /* Full width on small screens */
+    width: 100%;
     margin-top: 0;
   }
 }
